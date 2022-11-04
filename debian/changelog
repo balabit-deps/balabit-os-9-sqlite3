@@ -1,3 +1,12 @@
+sqlite3 (3.37.2-2ubuntu0.1) jammy-security; urgency=medium
+
+  * SECURITY UPDATE: array-bounds overflow via large string argument
+    - debian/patches/CVE-2022-35737.patch: increase the size of loop
+      variables in src/printf.c.
+    - CVE-2022-35737
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Fri, 04 Nov 2022 09:09:13 -0400
+
 sqlite3 (3.37.2-2) unstable; urgency=medium
 
   * Fix non-Linux installation. 

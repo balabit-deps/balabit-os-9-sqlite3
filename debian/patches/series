@@ -6,3 +6,4 @@
 31-increase_SQLITE_MAX_DEFAULT_PAGE_SIZE_to_32k.patch
 02-use-packaged-lempar.c.patch
 40-amalgamation_configure.patch
+CVE-2022-35737.patch
