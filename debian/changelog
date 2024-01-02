@@ -1,3 +1,19 @@
+sqlite3 (3.37.2-2ubuntu0.3) jammy-security; urgency=medium
+
+  * SECURITY UPDATE: azProhibitedFunctions protection mechanism issue when
+    using --safe
+    - debian/patches/50-Fix_safe_mode_authorizer_callback.patch: make sure
+      that safe mode rejects certain UDFs in src/shell.c.in,
+      test/shell2.test.
+    - CVE-2022-46908
+  * SECURITY UPDATE: heap overflow in sessionReadRecord
+    - debian/patches/CVE-2023-7104.patch: fix a buffer overread in the
+      sessions extension that could occur when processing a corrupt
+      changeset in ext/session/sqlite3session.c.
+    - CVE-2023-7104
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Tue, 02 Jan 2024 09:41:49 -0500
+
 sqlite3 (3.37.2-2ubuntu0.1) jammy-security; urgency=medium
 
   * SECURITY UPDATE: array-bounds overflow via large string argument

@@ -1,0 +1,42 @@
+Description: fix incorrect azProhibitedFunctions protection mechanism when using --safe
+Origin: obtained from Debian's (3.40.0-2) package, thanks to Laszlo Boszormenyi (GCS)
+
+--- a/src/shell.c.in
++++ b/src/shell.c.in
+@@ -1829,7 +1829,7 @@ static int safeModeAuth(
+     "zipfile",
+     "zipfile_cds",
+   };
+-  UNUSED_PARAMETER(zA2);
++  UNUSED_PARAMETER(zA1);
+   UNUSED_PARAMETER(zA3);
+   UNUSED_PARAMETER(zA4);
+   switch( op ){
+@@ -1840,7 +1840,7 @@ static int safeModeAuth(
+     case SQLITE_FUNCTION: {
+       int i;
+       for(i=0; i<ArraySize(azProhibitedFunctions); i++){
+-        if( sqlite3_stricmp(zA1, azProhibitedFunctions[i])==0 ){
++        if( sqlite3_stricmp(zA2, azProhibitedFunctions[i])==0 ){
+           failIfSafeMode(p, "cannot use the %s() function in safe mode",
+                          azProhibitedFunctions[i]);
+         }
+--- a/test/shell2.test
++++ b/test/shell2.test
+@@ -188,4 +188,16 @@ b
+ 2
+ }}
+ 
++# Verify that safe mode rejects certain UDFs
++# Reported at https://sqlite.org/forum/forumpost/07beac8056151b2f
++do_test shell2-1.4.8 {
++  catchcmd "-safe :memory:" {
++ SELECT edit('DoNotCare');}
++} {1 {line 2: cannot use the edit() function in safe mode}}
++do_test shell2-1.4.9 {
++  catchcmd "-safe :memory:" {
++ SELECT writefile('DoNotCare', x'');}
++} {1 {line 2: cannot use the writefile() function in safe mode}}
++
++
+ finish_test
