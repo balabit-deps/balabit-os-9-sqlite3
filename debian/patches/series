@@ -9,3 +9,4 @@
 CVE-2022-35737.patch
 50-Fix_safe_mode_authorizer_callback.patch
 CVE-2023-7104.patch
+CVE-2025-29088.patch

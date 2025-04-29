@@ -1,3 +1,12 @@
+sqlite3 (3.37.2-2ubuntu0.4) jammy-security; urgency=medium
+
+  * SECURITY UPDATE: DoS via sqlite3_db_config arguments
+    - debian/patches/CVE-2025-29088.patch: harden SQLITE_DBCONFIG_LOOKASIDE
+      interface against misuse in src/main.c, src/sqlite.h.in.
+    - CVE-2025-29088
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Tue, 29 Apr 2025 12:38:50 -0400
+
 sqlite3 (3.37.2-2ubuntu0.3) jammy-security; urgency=medium
 
   * SECURITY UPDATE: azProhibitedFunctions protection mechanism issue when
